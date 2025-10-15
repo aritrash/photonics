@@ -1,0 +1,37 @@
+// Photonic NOT Gate Workflow
+digraph {
+	rankdir=LR
+	dpi=300
+	subgraph cluster_photonic {
+		color=blue label="Photonic Layer" style=dashed
+		A [label="Laser Input
+(Intensity Coded)" fillcolor=lightblue shape=ellipse style=filled]
+		B [label="Microring Resonator
+(NOT Gate)" fillcolor=lightyellow shape=box style=filled]
+	}
+	subgraph cluster_logic {
+		color=darkgreen label="Logic Layer" style=dashed
+		C [label="Drop Port Output
+(Inverted Signal)" fillcolor=lightgreen shape=ellipse style=filled]
+		D [label="Through Port Output
+(Uninverted Residual)" fillcolor=lightgrey shape=ellipse style=filled]
+		E [label="Logic Network
+(AND, OR, XOR)" fillcolor=khaki1 shape=box style=filled]
+	}
+	subgraph cluster_ml {
+		color=orange label="Computation Layer" style=dashed
+		F [label="Regression / ML Block
+(Linear Regression, NN Unit)" fillcolor=gold shape=box style=filled]
+	}
+	subgraph cluster_app {
+		color=purple label="Application Layer" style=dashed
+		G [label="Output Prediction
+(ML/Computation Result)" fillcolor=palegreen shape=ellipse style=filled]
+	}
+	A -> B [label=" Input Light "]
+	B -> C [label=" Inverted Signal "]
+	B -> D [label=" Residual Signal "]
+	C -> E [label=" Cascaded Gates "]
+	E -> F [label=" Computation Stage "]
+	F -> G [label=" Result "]
+}
